@@ -172,11 +172,6 @@ public class Web3View extends WebView {
         callbackToJS(callbackId, JS_PROTOCOL_ON_FAILURE, JS_PROTOCOL_CANCELLED);
     }
 
-    public void onSignCancel(Message message) {
-        long callbackId = message.leafPosition;
-        callbackToJS(callbackId, JS_PROTOCOL_ON_FAILURE, JS_PROTOCOL_CANCELLED);
-    }
-
     private void callbackToJS(long callbackId, String function, String param) {
         String callback = String.format(function, callbackId, param);
         post(() -> evaluateJavascript(callback, value -> Log.d("WEB_VIEW", value)));
