@@ -59,19 +59,19 @@ public class MainActivity extends AppCompatActivity implements
     @Override
     public void onSignMessage(Message message) {
         Toast.makeText(this, message.getMessage(), Toast.LENGTH_LONG).show();
-        web3.onSignCancel(message);
+        web3.onSignCancel(message.getCallbackId());
     }
 
     @Override
     public void onSignPersonalMessage(Message message) {
         Toast.makeText(this, message.getMessage(), Toast.LENGTH_LONG).show();
-        web3.onSignCancel(message);
+        web3.onSignCancel(message.getCallbackId());
     }
 
     @Override
     public void onSignTypedMessage(Message message) {
         Toast.makeText(this, new Gson().toJson(message), Toast.LENGTH_LONG).show();
-        web3.onSignCancel(message);
+        web3.onSignCancel(message.getCallbackId());
     }
 
     @Override
@@ -86,12 +86,11 @@ public class MainActivity extends AppCompatActivity implements
                 .append(transaction.payload).append(" : ")
                 .toString();
         Toast.makeText(this, str, Toast.LENGTH_LONG).show();
-        web3.onSignCancel(transaction);
+        web3.onSignCancel(transaction.leafPosition);
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        // 这里处理交易，调起sdk发起交易，交易结束给webview回调
     }
 }

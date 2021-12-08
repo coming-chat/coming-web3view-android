@@ -167,8 +167,7 @@ public class Web3View extends WebView {
         callbackToJS(callbackId, JS_PROTOCOL_ON_FAILURE, error);
     }
 
-    public void onSignCancel(Web3Transaction transaction) {
-        long callbackId = transaction.leafPosition;
+    public void onSignCancel(long callbackId) {
         callbackToJS(callbackId, JS_PROTOCOL_ON_FAILURE, JS_PROTOCOL_CANCELLED);
     }
 
