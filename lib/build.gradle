@@ -6,11 +6,11 @@ apply plugin: 'com.github.dcendents.android-maven'
 group='coming.web3'
 
 android {
-    compileSdkVersion 31
+    compileSdkVersion COMPILE_SDK
 
     defaultConfig {
-        minSdkVersion 21
-        targetSdkVersion 31
+        minSdkVersion MINIMUM_SDK
+        targetSdkVersion TARGET_SDK
         versionCode 1
         versionName "1.0"
 
@@ -25,8 +25,8 @@ android {
     }
 
     compileOptions {
-        targetCompatibility 1.8
-        sourceCompatibility 1.8
+        targetCompatibility JAVA_VERSION
+        sourceCompatibility JAVA_VERSION
     }
 
     task androidSourcesJar(type: Jar) {

@@ -1,11 +1,11 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 31
+    compileSdkVersion COMPILE_SDK
     defaultConfig {
         applicationId "coming.web3view"
-        minSdkVersion 21
-        targetSdkVersion 31
+        minSdkVersion MINIMUM_SDK
+        targetSdkVersion TARGET_SDK
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner 'androidx.test.runner.AndroidJUnitRunner'
