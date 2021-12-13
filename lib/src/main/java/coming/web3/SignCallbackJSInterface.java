@@ -3,24 +3,13 @@ package coming.web3;
 import android.text.TextUtils;
 import android.webkit.JavascriptInterface;
 import android.webkit.WebView;
-
 import androidx.annotation.NonNull;
-
-import com.google.gson.Gson;
-
-import org.web3j.protocol.core.DefaultBlockParameter;
-import org.web3j.protocol.core.DefaultBlockParameterName;
-
 import java.math.BigInteger;
-
 import coming.web3.enity.Address;
 import coming.web3.enity.Message;
 import coming.web3.enity.SignMessageType;
-import coming.web3.enity.TypedData;
-import coming.web3.enity.Web3Call;
 import coming.web3.enity.Web3Transaction;
 import coming.web3.util.Hex;
-
 
 public class SignCallbackJSInterface {
 
