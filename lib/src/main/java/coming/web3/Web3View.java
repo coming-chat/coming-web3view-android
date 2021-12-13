@@ -81,7 +81,7 @@ public class Web3View extends WebView {
                 innerOnSignTransactionListener,
                 innerOnSignMessageListener,
                 innerOnSignPersonalMessageListener,
-                innerOnSignTypedMessageListener), "trust");
+                innerOnSignTypedMessageListener), "coming");
 
         super.setWebViewClient(webViewClient);
     }
