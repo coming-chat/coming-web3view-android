@@ -45,6 +45,7 @@ public class MainActivity extends AppCompatActivity implements
     private void setupWeb3() {
         WebView.setWebContentsDebuggingEnabled(BuildConfig.DEBUG);
         web3.setChainId(1);
+        web3.loadUrl("https://dapp-starter.productsway.com");
         web3.setRpcUrl("https://mainnet.infura.io/v3/30c277db0eaa4085ac32ced784bc9af9");
         // 设置
         web3.setWalletAddress(new Address("0x178a8AB44b71858b38Cc68f349A06f397A73bFf5"));
