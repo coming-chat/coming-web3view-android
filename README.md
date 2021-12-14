@@ -8,6 +8,13 @@ Coming Web3View 是coming的web3浏览器接口协议，支持以太坊生态、
 
 <https://github.com/AlphaWallet/alpha-wallet-android>
 
+## 接口测试网址
+https://danfinlay.github.io/js-eth-personal-sign-examples/
+
+## init.js 和注入js
+webview注入js: https://github.com/coming-chat/coming-web3-provider/blob/main/dist/Coming-min.js
+init.js: https://github.com/coming-chat/coming-web3view-android/blob/main/lib/src/main/res/raw/init.js
+
 ## 什么是dapp
 
 DApp是（Decentralized Application）的缩写，中文直译为去中心化应用，也可以理解为分布式应用。
