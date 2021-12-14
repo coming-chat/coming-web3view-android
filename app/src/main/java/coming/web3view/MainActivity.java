@@ -6,9 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.webkit.WebView;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.google.gson.Gson;
-
 import coming.web3.OnSignMessageListener;
 import coming.web3.OnSignPersonalMessageListener;
 import coming.web3.OnSignTransactionListener;
@@ -16,7 +14,6 @@ import coming.web3.OnSignTypedMessageListener;
 import coming.web3.Web3View;
 import coming.web3.enity.Address;
 import coming.web3.enity.Message;
-import coming.web3.enity.TypedData;
 import coming.web3.enity.Web3Transaction;
 import trust.web3jprovider.BuildConfig;
 
