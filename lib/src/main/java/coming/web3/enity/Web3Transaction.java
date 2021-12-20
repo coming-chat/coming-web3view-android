@@ -24,37 +24,6 @@ public class Web3Transaction implements Parcelable {
             BigInteger gasPrice,
             BigInteger gasLimit,
             long nonce,
-            String payload) {
-        this(recipient, contract, value, gasPrice, gasLimit, nonce, payload, 0);
-    }
-
-    public Web3Transaction(
-            Address recipient,
-            Address contract,
-            BigInteger value,
-            BigInteger gasPrice,
-            BigInteger gasLimit,
-            long nonce,
-            String payload,
-            String description) {
-        this.recipient = recipient;
-        this.contract = contract;
-        this.value = value;
-        this.gasPrice = gasPrice;
-        this.gasLimit = gasLimit;
-        this.nonce = nonce;
-        this.payload = payload;
-        this.leafPosition = 0;
-        this.description = description;
-    }
-
-    public Web3Transaction(
-            Address recipient,
-            Address contract,
-            BigInteger value,
-            BigInteger gasPrice,
-            BigInteger gasLimit,
-            long nonce,
             String payload,
             long leafPosition) {
         this.recipient = recipient;
