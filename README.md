@@ -192,8 +192,7 @@ web3.onSignError(Message|Transaction, "some_error");
     params: [currentCid.cid, currentPrice]
 }
 该类型是hex类型，包装在交易体中，客户端拿到数据需要讲hex转成对应的json，调用sdk的方法进行签名：
-
-![image-20211220171634107](https://tva1.sinaimg.cn/large/008i3skNly1gxkf2tzsepj31e40aoabp.jpg)
+![image-20211220172604367](https://tva1.sinaimg.cn/large/008i3skNgy1gxkfcp38hdj31a205qaay.jpg)
 
 
 
