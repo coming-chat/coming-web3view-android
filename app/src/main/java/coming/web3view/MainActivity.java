@@ -86,9 +86,8 @@ public class MainActivity extends AppCompatActivity implements
                 .append(transaction.nonce).append(" : ")
                 .append(transaction.payload).append(" : ")
                 .toString();
-        String hexdata = Hex.hexToUtf8(transaction.payload.replaceAll("0x",""));
-
-        Toast.makeText(this, hexdata, Toast.LENGTH_LONG).show();
+        String transationPayloadData = Hex.hexToUtf8(transaction.payload.replaceAll("0x",""));
+        Toast.makeText(this, transationPayloadData, Toast.LENGTH_LONG).show();
         web3.onSignCancel(transaction.leafPosition);
     }
 
