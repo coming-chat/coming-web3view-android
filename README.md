@@ -156,16 +156,28 @@ web3.onSignError(Message|Transaction, "some_error");
 
 前端使用 ether.js 进行签名，发起交易。
 
+### 购买Cid
+![image](https://user-images.githubusercontent.com/7252280/146741812-0601ecfd-b649-4154-9ecf-c5a42df9f41b.png)
+
+
+#### 前端代码
 ```js
-try {
-      library
+ library
         .getSigner(account)
         .sendUncheckedTransaction({
-          type: 1,
-          customData: {
-            method: 'comingAuction.bid',
-            params: [currentCid, currentPrice],
-          },
+          gasPrice: 0,
+          gasLimit: 60000,
+          to: '',
+          nonce: 1000,
+          value: 0,
+          data: ethers.utils.hexlify(
+            ethers.utils.toUtf8Bytes(
+              JSON.stringify({
+                method: 'comingAuction.cid',
+                params: [currentCid.cid, currentPrice],
+              }),
+            ),
+          ),
         })
         .then((signature: any) => {
           window.alert(`Success!\n\n${signature}`)
@@ -173,13 +185,16 @@ try {
         .catch((err: Error) => {
           window.alert(`Failure!${err && err.message ? `\n\n${err.message}` : ''}`)
         })
-    } catch (error) {
-      setIsCheckLoading(false)
-      openNotification(
-        'failed',
-        'purchase',
-        <Icon width={16} height={16} iconSrc={IconFailure} />,
-        error.toString(),
-      )
-    }
 ```
+### 接口传参
+{
+    method: 'comingAuction.cid',
+    params: [currentCid.cid, currentPrice]
+}
+该类型是hex类型，包装在交易体中，客户端拿到数据需要讲hex转成对应的json，调用sdk的方法进行签名：
+
+![image-20211220171634107](https://tva1.sinaimg.cn/large/008i3skNly1gxkf2tzsepj31e40aoabp.jpg)
+
+
+
+
