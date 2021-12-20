@@ -152,3 +152,34 @@ web3.onSignPersonalMessageSuccessful(message, "0x...");
 web3.onSignTransactionSuccessful(transaction, "0x...");
 web3.onSignError(Message|Transaction, "some_error");
 ```
+## 前端接入
+
+前端使用 ether.js 进行签名，发起交易。
+
+```js
+try {
+      library
+        .getSigner(account)
+        .sendUncheckedTransaction({
+          type: 1,
+          customData: {
+            method: 'comingAuction.bid',
+            params: [currentCid, currentPrice],
+          },
+        })
+        .then((signature: any) => {
+          window.alert(`Success!\n\n${signature}`)
+        })
+        .catch((err: Error) => {
+          window.alert(`Failure!${err && err.message ? `\n\n${err.message}` : ''}`)
+        })
+    } catch (error) {
+      setIsCheckLoading(false)
+      openNotification(
+        'failed',
+        'purchase',
+        <Icon width={16} height={16} iconSrc={IconFailure} />,
+        error.toString(),
+      )
+    }
+```
