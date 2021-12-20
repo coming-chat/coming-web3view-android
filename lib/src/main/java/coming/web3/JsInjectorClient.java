@@ -35,6 +35,7 @@ class JsInjectorClient {
 
     private int chainId = 1;
     private Address walletAddress;
+    private String cid;
     private String rpcUrl = "";
 
     JsInjectorClient(Context context) {
@@ -48,6 +49,14 @@ class JsInjectorClient {
 
     public void setWalletAddress(Address address) {
         this.walletAddress = address;
+    }
+
+    public String getCid() {
+        return cid;
+    }
+
+    public void setCid(String cid) {
+        this.cid = cid;
     }
 
     public int getChainId() {

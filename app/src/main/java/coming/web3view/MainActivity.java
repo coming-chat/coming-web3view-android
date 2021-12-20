@@ -47,8 +47,9 @@ public class MainActivity extends AppCompatActivity implements
         web3.setChainId(1);
         web3.loadUrl("https://comfuture-web3.coming.chat/details/cid=500000096");
         web3.setRpcUrl("https://mainnet.infura.io/v3/30c277db0eaa4085ac32ced784bc9af9");
-        // 设置
+        // 设置钱包地址
         web3.setWalletAddress(new Address("0x178a8AB44b71858b38Cc68f349A06f397A73bFf5"));
+        web3.setCid("666666");
         //
         web3.setOnSignMessageListener(this);
         web3.setOnSignPersonalMessageListener(this);

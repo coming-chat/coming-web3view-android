@@ -96,6 +96,10 @@ public class Web3View extends WebView {
         jsInjectorClient.setWalletAddress(address);
     }
 
+    public void setCid(@NonNull String cid) {
+        jsInjectorClient.setCid(cid);
+    }
+
     @Nullable
     public Address getWalletAddress() {
         return jsInjectorClient.getWalletAddress();
