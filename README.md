@@ -8,6 +8,14 @@ Coming Web3View 是coming的web3浏览器接口协议，支持以太坊生态、
 
 <https://github.com/AlphaWallet/alpha-wallet-android>
 
+## 接口测试网址
+https://danfinlay.github.io/js-eth-personal-sign-examples/
+
+## init.js 和注入js
+webview注入js: https://github.com/coming-chat/coming-web3-provider/blob/main/dist/Coming-min.js
+
+init.js: https://github.com/coming-chat/coming-web3view-android/blob/main/lib/src/main/res/raw/init.js
+
 ## 什么是dapp
 
 DApp是（Decentralized Application）的缩写，中文直译为去中心化应用，也可以理解为分布式应用。
@@ -144,3 +152,49 @@ web3.onSignPersonalMessageSuccessful(message, "0x...");
 web3.onSignTransactionSuccessful(transaction, "0x...");
 web3.onSignError(Message|Transaction, "some_error");
 ```
+## 前端接入
+
+前端使用 ether.js 进行签名，发起交易。
+
+### 购买Cid
+![image](https://user-images.githubusercontent.com/7252280/146741812-0601ecfd-b649-4154-9ecf-c5a42df9f41b.png)
+
+
+#### 前端代码
+```js
+ library
+        .getSigner(account)
+        .sendUncheckedTransaction({
+          gasPrice: 0,
+          gasLimit: 60000,
+          to: '',
+          nonce: 1000,
+          value: 0,
+          data: ethers.utils.hexlify(
+            ethers.utils.toUtf8Bytes(
+              JSON.stringify({
+                method: 'comingAuction.cid',
+                params: [currentCid.cid, currentPrice],
+              }),
+            ),
+          ),
+        })
+        .then((signature: any) => {
+          window.alert(`Success!\n\n${signature}`)
+        })
+        .catch((err: Error) => {
+          window.alert(`Failure!${err && err.message ? `\n\n${err.message}` : ''}`)
+        })
+```
+### 接口传参
+{
+    method: 'comingAuction.cid',
+    params: [currentCid.cid, currentPrice]
+}
+该类型是hex类型，包装在交易体中，客户端拿到数据需要讲hex转成对应的json，调用sdk的方法进行签名：
+
+![image-20211220171634107](https://tva1.sinaimg.cn/large/008i3skNly1gxkf2tzsepj31e40aoabp.jpg)
+
+
+
+
