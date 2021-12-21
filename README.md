@@ -203,7 +203,7 @@ web3.onSignError(Message|Transaction, "some_error");
 客户端接收到前端的signTransaction 回调后做如下处理：
 
 1. 解析payload或data字段，hex转string,生成对应的json字段
-2. 获取交易原文
+2. 获取交易原文 signature
 3. 解析交易原文，展示到交易弹窗
 4. 用户点击确定进行签名
 5. 签名结果提交后端进行广播
