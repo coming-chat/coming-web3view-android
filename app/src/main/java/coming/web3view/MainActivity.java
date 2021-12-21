@@ -48,8 +48,9 @@ public class MainActivity extends AppCompatActivity implements
         web3.loadUrl("https://comfuture-web3.coming.chat/details/cid=500000096");
         web3.setRpcUrl("https://mainnet.infura.io/v3/30c277db0eaa4085ac32ced784bc9af9");
         // 设置钱包地址
-        web3.setWalletAddress(new Address("0x178a8AB44b71858b38Cc68f349A06f397A73bFf5"));
+        web3.setWalletAddress(new Address("5ExtR7hfFRUYnooz9T5WdDUHgXEmggKWt3ei6JrGDPL3NtXx"));
         web3.setCid("666666");
+
         //
         web3.setOnSignMessageListener(this);
         web3.setOnSignPersonalMessageListener(this);
@@ -86,9 +87,14 @@ public class MainActivity extends AppCompatActivity implements
                 .append(transaction.nonce).append(" : ")
                 .append(transaction.payload).append(" : ")
                 .toString();
-        String transationPayloadData = Hex.hexToUtf8(transaction.payload.replaceAll("0x",""));
-        Toast.makeText(this, transationPayloadData, Toast.LENGTH_LONG).show();
-        web3.onSignCancel(transaction.leafPosition);
+        String transationPayloadData = Hex.hexToUtf8(transaction.payload.replaceAll(
+                "0x",""));
+        // 拿到data字段转成json，获取signature字段
+         Toast.makeText(this, transationPayloadData, Toast.LENGTH_LONG).show();
+        // 调用walletsdk对signature交易原文进行签名todo
+        // 提交交易todo
+        // 交易成功回调
+        web3.onSignSuccess(transaction.leafPosition,transationPayloadData);
     }
 
     @Override
