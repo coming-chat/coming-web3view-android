@@ -156,6 +156,8 @@ web3.onSignError(Message|Transaction, "some_error");
 
 前端使用 ether.js 进行签名，发起交易。
 
+- https://comfuture-web3.coming.chat/details/cid=500000096
+
 ### 购买Cid
 ![image](https://user-images.githubusercontent.com/7252280/146741812-0601ecfd-b649-4154-9ecf-c5a42df9f41b.png)
 
@@ -173,8 +175,10 @@ web3.onSignError(Message|Transaction, "some_error");
           data: ethers.utils.hexlify(
             ethers.utils.toUtf8Bytes(
               JSON.stringify({
-                method: 'comingAuction.cid',
+                chain: 'minix',     // 链信息， polkadot, minix，chainx
+                method: 'comingAuction.bid', 
                 params: [currentCid.cid, currentPrice],
+                signature: signature   // 构造的交易原文
               }),
             ),
           ),
@@ -188,12 +192,21 @@ web3.onSignError(Message|Transaction, "some_error");
 ```
 ### 接口传参
 {
-    method: 'comingAuction.cid',
+    chain: 'minix'
+    method: 'comingAuction.bid',
     params: [currentCid.cid, currentPrice]
+    signature: signature
 }
 该类型是hex类型，包装在交易体中，客户端拿到数据需要讲hex转成对应的json，调用sdk的方法进行签名：
+![image-20211220172604367](https://tva1.sinaimg.cn/large/008i3skNgy1gxkfcp38hdj31a205qaay.jpg)
 
-![image-20211220171634107](https://tva1.sinaimg.cn/large/008i3skNly1gxkf2tzsepj31e40aoabp.jpg)
+客户端接收到前端的signTransaction 回调后做如下处理：
+
+1. 解析payload或data字段，hex转string,生成对应的json字段
+2. 获取交易原文 signature
+3. 解析交易原文，展示到交易弹窗
+4. 用户点击确定进行签名
+5. 签名结果提交后端进行广播
 
 
 
