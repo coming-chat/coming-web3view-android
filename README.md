@@ -173,6 +173,7 @@ web3.onSignError(Message|Transaction, "some_error");
           data: ethers.utils.hexlify(
             ethers.utils.toUtf8Bytes(
               JSON.stringify({
+                chain: 'minix'
                 method: 'comingAuction.cid',
                 params: [currentCid.cid, currentPrice],
               }),
