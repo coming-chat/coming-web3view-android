@@ -60,6 +60,8 @@ window.ComingWallet.init(__rpcURL, {
   enable: function() {
       return new Promise(function(resolve, reject) {
           //send back the coinbase account as an array of one
+          console.log("enable web3 sdk",__addressHex)
+          coming.connect();
           resolve([__addressHex])
       })
   }

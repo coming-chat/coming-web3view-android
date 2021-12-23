@@ -6,6 +6,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.webkit.WebView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import coming.web3.OnConnectListener;
 import coming.web3.OnSignMessageListener;
 import coming.web3.OnSignPersonalMessageListener;
 import coming.web3.OnSignTransactionListener;
@@ -21,7 +23,7 @@ import trust.web3jprovider.BuildConfig;
 
 
 public class MainActivity extends AppCompatActivity implements
-        OnSignTransactionListener, OnSignPersonalMessageListener, OnSignTypedMessageListener, OnSignMessageListener {
+        OnSignTransactionListener, OnSignPersonalMessageListener, OnSignTypedMessageListener, OnSignMessageListener , OnConnectListener {
 
     private TextView url;
     private Web3View web3;
@@ -55,6 +57,13 @@ public class MainActivity extends AppCompatActivity implements
         web3.setOnSignPersonalMessageListener(this);
         web3.setOnSignTransactionListener(this);
         web3.setOnSignTypedMessageListener(this);
+        // web3 连接钱包，请求授权
+        web3.setOnConnectListener(this);
+    }
+
+    @Override
+    public void onConnect() {
+        Toast.makeText(getApplicationContext(),"连接钱包",Toast.LENGTH_LONG).show();
     }
 
     @Override
@@ -127,4 +136,5 @@ public class MainActivity extends AppCompatActivity implements
         resultDialog.setCancelable(true);
         resultDialog.show();
     }
+
 }

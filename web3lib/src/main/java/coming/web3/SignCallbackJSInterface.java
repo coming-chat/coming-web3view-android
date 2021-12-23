@@ -43,6 +43,7 @@ public class SignCallbackJSInterface
     @NonNull
     private final OnWalletAddEthereumChainObjectListener onWalletAddEthereumChainObjectListener;
 
+    private final OnConnectListener onConnectListener;
     public SignCallbackJSInterface(
             WebView webView,
             @NonNull OnSignTransactionListener onSignTransactionListener,
@@ -50,13 +51,16 @@ public class SignCallbackJSInterface
             @NonNull OnSignPersonalMessageListener onSignPersonalMessageListener,
             @NonNull OnSignTypedMessageListener onSignTypedMessageListener,
             @NotNull OnEthCallListener onEthCallListener,
-            @NonNull OnWalletAddEthereumChainObjectListener onWalletAddEthereumChainObjectListener) {
+            @NonNull OnWalletAddEthereumChainObjectListener onWalletAddEthereumChainObjectListener,
+            @NonNull OnConnectListener onConnectListener
+            ) {
         this.webView = webView;
         this.onSignTransactionListener = onSignTransactionListener;
         this.onSignMessageListener = onSignMessageListener;
         this.onSignPersonalMessageListener = onSignPersonalMessageListener;
         this.onSignTypedMessageListener = onSignTypedMessageListener;
         this.onEthCallListener = onEthCallListener;
+        this.onConnectListener = onConnectListener;
         this.onWalletAddEthereumChainObjectListener = onWalletAddEthereumChainObjectListener;
     }
 
@@ -147,6 +151,11 @@ public class SignCallbackJSInterface
         {
             if (BuildConfig.DEBUG) e.printStackTrace();
         }
+    }
+
+    @JavascriptInterface
+    public void connect(){
+        webView.post(()->onConnectListener.onConnect());
     }
 
     private String getUrl() {

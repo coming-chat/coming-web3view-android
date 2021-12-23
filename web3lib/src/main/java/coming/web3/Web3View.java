@@ -49,6 +49,9 @@ public class Web3View extends WebView {
     private OnWalletAddEthereumChainObjectListener onWalletAddEthereumChainObjectListener;
     @Nullable
     private OnVerifyListener onVerifyListener;
+    @NonNull
+    private OnConnectListener onConnectListener;
+
     @Nullable
     private OnGetBalanceListener onGetBalanceListener;
     private Web3ViewClient webViewClient;
@@ -65,7 +68,6 @@ public class Web3View extends WebView {
 
     public Web3View(@NonNull Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
-
         init();
     }
 
@@ -98,7 +100,8 @@ public class Web3View extends WebView {
                 innerOnSignPersonalMessageListener,
                 innerOnSignTypedMessageListener,
                 innerOnEthCallListener,
-                innerAddChainListener), "coming");
+                innerAddChainListener,
+                innerOnConnectListener), "coming");
 
         super.setWebViewClient(webViewClient);
     }
@@ -161,6 +164,10 @@ public class Web3View extends WebView {
     
     public void setOnSignTypedMessageListener(@Nullable OnSignTypedMessageListener onSignTypedMessageListener) {
         this.onSignTypedMessageListener = onSignTypedMessageListener;
+    }
+
+    public void setOnConnectListener(@Nullable OnConnectListener onConnectListener) {
+        this.onConnectListener = onConnectListener;
     }
 
     public void onSignTransactionSuccessful(Web3Transaction transaction, String signHex) {
@@ -248,6 +255,13 @@ public class Web3View extends WebView {
         @Override
         public void onSignTypedMessage(EthereumTypedMessage message) {
             onSignTypedMessageListener.onSignTypedMessage(message);
+        }
+    };
+
+    private final OnConnectListener innerOnConnectListener = new OnConnectListener() {
+        @Override
+        public void onConnect() {
+            onConnectListener.onConnect();
         }
     };
 
