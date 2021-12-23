@@ -25,12 +25,16 @@ import coming.web3.enity.EthereumMessage;
 import coming.web3.enity.EthereumTypedMessage;
 import coming.web3.enity.Message;
 import coming.web3.enity.TypedData;
+import coming.web3.enity.URLLoadInterface;
+import coming.web3.enity.WalletAddEthereumChainObject;
+import coming.web3.enity.Web3Call;
 import coming.web3.enity.Web3Transaction;
 
 public class Web3View extends WebView {
     private static final String JS_PROTOCOL_CANCELLED = "cancelled";
     private static final String JS_PROTOCOL_ON_SUCCESSFUL = "onSignSuccessful(%1$s, \"%2$s\")";
     private static final String JS_PROTOCOL_ON_FAILURE = "onSignError(%1$s, \"%2$s\")";
+
     @Nullable
     private OnSignTransactionListener onSignTransactionListener;
     @Nullable
@@ -39,8 +43,17 @@ public class Web3View extends WebView {
     private OnSignPersonalMessageListener onSignPersonalMessageListener;
     @Nullable
     private OnSignTypedMessageListener onSignTypedMessageListener;
-    private JsInjectorClient jsInjectorClient;
+    @Nullable
+    private OnEthCallListener onEthCallListener;
+    @Nullable
+    private OnWalletAddEthereumChainObjectListener onWalletAddEthereumChainObjectListener;
+    @Nullable
+    private OnVerifyListener onVerifyListener;
+    @Nullable
+    private OnGetBalanceListener onGetBalanceListener;
     private Web3ViewClient webViewClient;
+    private URLLoadInterface loadInterface;
+    private JsInjectorClient jsInjectorClient;
 
     public Web3View(@NonNull Context context) {
         this(context, null);
@@ -83,7 +96,9 @@ public class Web3View extends WebView {
                 innerOnSignTransactionListener,
                 innerOnSignMessageListener,
                 innerOnSignPersonalMessageListener,
-                innerOnSignTypedMessageListener), "coming");
+                innerOnSignTypedMessageListener,
+                innerOnEthCallListener,
+                innerAddChainListener), "coming");
 
         super.setWebViewClient(webViewClient);
     }
@@ -180,6 +195,24 @@ public class Web3View extends WebView {
     public void onSignSuccess(long callbackId, String signHex) {
         callbackToJS(callbackId,JS_PROTOCOL_ON_SUCCESSFUL,signHex);
     }
+
+    private final OnEthCallListener innerOnEthCallListener = new OnEthCallListener()
+    {
+        @Override
+        public void onEthCall(Web3Call txData)
+        {
+            onEthCallListener.onEthCall(txData);
+        }
+    };
+
+    private final OnWalletAddEthereumChainObjectListener innerAddChainListener = new OnWalletAddEthereumChainObjectListener()
+    {
+        @Override
+        public void onWalletAddEthereumChainObject(WalletAddEthereumChainObject chainObject)
+        {
+            onWalletAddEthereumChainObjectListener.onWalletAddEthereumChainObject(chainObject);
+        }
+    };
 
     private void callbackToJS(long callbackId, String function, String param) {
         String callback = String.format(function, callbackId, param);
