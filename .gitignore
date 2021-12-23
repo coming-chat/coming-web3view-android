@@ -3,7 +3,9 @@
 .DS_Store
 /captures
 .externalNativeBuild
-
+build
+./web3lib/build
+./web3lib/build/*
 ### Android ###
 # Built application files
 *.apk
