@@ -3,6 +3,8 @@
 .DS_Store
 /captures
 .externalNativeBuild
+./app/build
+*/build
 build
 ./web3lib/build
 ./web3lib/build/*
