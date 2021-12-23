@@ -6,6 +6,7 @@ import static androidx.biometric.BiometricManager.Authenticators.BIOMETRIC_WEAK;
 import static androidx.biometric.BiometricManager.Authenticators.DEVICE_CREDENTIAL;
 
 import android.app.Activity;
+import android.app.Dialog;
 import android.app.KeyguardManager;
 import android.content.Context;
 import android.content.Intent;
@@ -13,6 +14,7 @@ import android.os.Build;
 import android.text.TextUtils;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.biometric.BiometricManager;
 import androidx.biometric.BiometricPrompt;
 import androidx.core.content.ContextCompat;
@@ -36,7 +38,7 @@ import coming.web3.enity.Operation;
        a. UI for this
        b. Designate the key as weak locked
  */
-public class SignTransactionDialog
+public class SignTransactionDialog extends Dialog
 {
     public static final int REQUEST_CODE_CONFIRM_DEVICE_CREDENTIALS = 123;
 
@@ -46,8 +48,9 @@ public class SignTransactionDialog
 
     private BiometricPrompt biometricPrompt;
 
-    public SignTransactionDialog(Context context)
+    public SignTransactionDialog(Activity context)
     {
+        super(context);
         BiometricManager biometricManager = BiometricManager.from(context);
         hasStrongBiometric = biometricManager.canAuthenticate(BIOMETRIC_STRONG) == BiometricManager.BIOMETRIC_SUCCESS;
         hasDeviceCredential = biometricManager.canAuthenticate(DEVICE_CREDENTIAL) == BiometricManager.BIOMETRIC_SUCCESS;
@@ -163,6 +166,7 @@ public class SignTransactionDialog
         }
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.M)
     private void showAuthenticationScreen(Activity activity, AuthenticationCallback authCallback, Operation callBackId)
     {
         KeyguardManager km = (KeyguardManager) activity.getSystemService(KEYGUARD_SERVICE);

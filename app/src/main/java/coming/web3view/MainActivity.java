@@ -16,6 +16,7 @@ import coming.web3.enity.EthereumMessage;
 import coming.web3.enity.EthereumTypedMessage;
 import coming.web3.enity.Web3Transaction;
 import coming.web3.util.Hex;
+import coming.web3.widget.AWalletAlertDialog;
 import trust.web3jprovider.BuildConfig;
 
 
@@ -24,6 +25,7 @@ public class MainActivity extends AppCompatActivity implements
 
     private TextView url;
     private Web3View web3;
+    private AWalletAlertDialog resultDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -98,5 +100,31 @@ public class MainActivity extends AppCompatActivity implements
     @Override
     public void onSignTypedMessage(EthereumTypedMessage message) {
         Toast.makeText(this, message.getMessage(), Toast.LENGTH_LONG).show();
+    }
+
+    private void onInvalidTransaction(Web3Transaction transaction)
+    {
+        resultDialog = new AWalletAlertDialog(this);
+        resultDialog.setIcon(AWalletAlertDialog.ERROR);
+        resultDialog.setTitle(getString(R.string.invalid_transaction));
+
+        if (transaction.recipient.equals(Address.EMPTY) && (transaction.payload == null || transaction.value != null))
+        {
+            resultDialog.setMessage(getString(R.string.contains_no_recipient));
+        }
+        else if (transaction.payload == null && transaction.value == null)
+        {
+            resultDialog.setMessage(getString(R.string.contains_no_value));
+        }
+        else
+        {
+            resultDialog.setMessage(getString(R.string.contains_no_data));
+        }
+        resultDialog.setButtonText(R.string.button_ok);
+        resultDialog.setButtonListener(v -> {
+            resultDialog.dismiss();
+        });
+        resultDialog.setCancelable(true);
+        resultDialog.show();
     }
 }
