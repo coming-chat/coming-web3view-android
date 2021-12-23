@@ -73,7 +73,10 @@ public class MainActivity extends AppCompatActivity implements
         // 调用walletsdk对signature交易原文进行签名todo
         // 提交交易todo
         // 交易成功回调
-        web3.onSignSuccess(transaction.leafPosition,transationPayloadData);
+        web3.onSignSuccess(transaction.leafPosition,"成功");
+
+        // 交易失败：  web3.onSignError(transaction,"失败");
+        // 用户取消交易: web3.onSignCancel(transaction, "cancel")
     }
 
     @Override
@@ -84,6 +87,7 @@ public class MainActivity extends AppCompatActivity implements
     @Override
     public void onSignMessage(EthereumMessage message) {
         Toast.makeText(this, message.getMessage(), Toast.LENGTH_LONG).show();
+        web3.onSignError(message,"交易失败");
     }
 
     @Override
