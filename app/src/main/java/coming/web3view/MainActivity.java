@@ -6,17 +6,14 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.webkit.WebView;
 import android.widget.TextView;
 import android.widget.Toast;
-import com.google.gson.Gson;
-
-import org.json.JSONObject;
-
 import coming.web3.OnSignMessageListener;
 import coming.web3.OnSignPersonalMessageListener;
 import coming.web3.OnSignTransactionListener;
 import coming.web3.OnSignTypedMessageListener;
 import coming.web3.Web3View;
 import coming.web3.enity.Address;
-import coming.web3.enity.Message;
+import coming.web3.enity.EthereumMessage;
+import coming.web3.enity.EthereumTypedMessage;
 import coming.web3.enity.Web3Transaction;
 import coming.web3.util.Hex;
 import trust.web3jprovider.BuildConfig;
@@ -59,24 +56,6 @@ public class MainActivity extends AppCompatActivity implements
     }
 
     @Override
-    public void onSignMessage(Message message) {
-        Toast.makeText(this, message.getMessage(), Toast.LENGTH_LONG).show();
-        web3.onSignCancel(message.getCallbackId());
-    }
-
-    @Override
-    public void onSignPersonalMessage(Message message) {
-        Toast.makeText(this, message.getMessage(), Toast.LENGTH_LONG).show();
-        web3.onSignCancel(message.getCallbackId());
-    }
-
-    @Override
-    public void onSignTypedMessage(Message message) {
-        Toast.makeText(this, new Gson().toJson(message), Toast.LENGTH_LONG).show();
-        web3.onSignCancel(message.getCallbackId());
-    }
-
-    @Override
     public void onSignTransaction(Web3Transaction transaction,String url) {
         String str = new StringBuilder()
                 .append(transaction.recipient == null ? "" : transaction.recipient.toString()).append(" : ")
@@ -100,5 +79,20 @@ public class MainActivity extends AppCompatActivity implements
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+    }
+
+    @Override
+    public void onSignMessage(EthereumMessage message) {
+        Toast.makeText(this, message.getMessage(), Toast.LENGTH_LONG).show();
+    }
+
+    @Override
+    public void onSignPersonalMessage(EthereumMessage message) {
+        Toast.makeText(this, message.getMessage(), Toast.LENGTH_LONG).show();
+    }
+
+    @Override
+    public void onSignTypedMessage(EthereumTypedMessage message) {
+        Toast.makeText(this, message.getMessage(), Toast.LENGTH_LONG).show();
     }
 }
