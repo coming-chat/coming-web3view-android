@@ -66,14 +66,6 @@ class JsInjectorClient {
         return comingUserInfo;
     }
 
-    public String getCid() {
-        return cid;
-    }
-
-    public void setCid(String cid) {
-        this.cid = cid;
-    }
-
     public int getChainId() {
         return chainId;
     }

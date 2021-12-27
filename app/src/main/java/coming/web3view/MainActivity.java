@@ -54,7 +54,6 @@ public class MainActivity extends AppCompatActivity implements
         web3.setWalletAddress(new Address("0x0000000000000000000000000000000000000000"));
 
         web3.setUserInfo(new UserInfo("9999999", "https://", "5ExtR7hfFRUYnooz9T5WdDUHgXEmggKWt3ei6JrGDPL3NtXx"));
-        web3.setCid("666666");
 
         //
         web3.setOnSignMessageListener(this);
