@@ -26,6 +26,7 @@ import coming.web3.enity.EthereumTypedMessage;
 import coming.web3.enity.Message;
 import coming.web3.enity.TypedData;
 import coming.web3.enity.URLLoadInterface;
+import coming.web3.enity.UserInfo;
 import coming.web3.enity.WalletAddEthereumChainObject;
 import coming.web3.enity.Web3Call;
 import coming.web3.enity.Web3Transaction;
@@ -135,6 +136,10 @@ public class Web3View extends WebView {
 
     public void setRpcUrl(@NonNull String rpcUrl) {
         jsInjectorClient.setRpcUrl(rpcUrl);
+    }
+
+    public void setUserInfo(UserInfo userInfo) {
+        jsInjectorClient.setComingUserInfo(userInfo);
     }
 
     @Nullable

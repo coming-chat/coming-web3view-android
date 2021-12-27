@@ -16,6 +16,7 @@ import coming.web3.Web3View;
 import coming.web3.enity.Address;
 import coming.web3.enity.EthereumMessage;
 import coming.web3.enity.EthereumTypedMessage;
+import coming.web3.enity.UserInfo;
 import coming.web3.enity.Web3Transaction;
 import coming.web3.util.Hex;
 import coming.web3.widget.AWalletAlertDialog;
@@ -49,7 +50,10 @@ public class MainActivity extends AppCompatActivity implements
         web3.loadUrl("https://comfuture-web3.coming.chat/details/cid=500000096");
         web3.setRpcUrl("https://mainnet.infura.io/v3/30c277db0eaa4085ac32ced784bc9af9");
         // 设置钱包地址
-        web3.setWalletAddress(new Address("0x4e7E43067C1d896361618190D21b64F3665E5111"));
+
+        web3.setWalletAddress(new Address("0x0000000000000000000000000000000000000000"));
+
+        web3.setUserInfo(new UserInfo("9999999", "https://", "5ExtR7hfFRUYnooz9T5WdDUHgXEmggKWt3ei6JrGDPL3NtXx"));
         web3.setCid("666666");
 
         //

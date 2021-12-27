@@ -1,7 +1,8 @@
 
-const __addressHex = "%1$s";
-const __rpcURL = "%2$s";
-const __chainID = "%3$s";
+const __addressHex = '%1$s';
+const __rpcURL = '%2$s';
+const __chainID = '%3$s';
+const __userInfo = '%4$s';
 
 function executeCallback (id, error, value) {
   ComingWallet.executeCallback(id, error, value)
@@ -81,5 +82,6 @@ window.web3.eth.getCoinbase = function(cb) {
     return cb(null, __addressHex)
 }
 window.web3.eth.defaultAccount = __addressHex
+window.web3.comingUserInfo = __userInfo
 
 window.ethereum = web3.currentProvider

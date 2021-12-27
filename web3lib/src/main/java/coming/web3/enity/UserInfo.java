@@ -3,6 +3,8 @@ package coming.web3.enity;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import com.google.gson.Gson;
+
 public class UserInfo implements Parcelable {
     public final String cid;
     public final String avator;

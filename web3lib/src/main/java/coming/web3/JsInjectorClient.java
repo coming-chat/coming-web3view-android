@@ -7,6 +7,11 @@ import android.util.Log;
 import androidx.annotation.Nullable;
 import androidx.annotation.RawRes;
 
+import com.fasterxml.jackson.databind.util.JSONPObject;
+import com.google.gson.Gson;
+
+import org.json.JSONObject;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.HashMap;
@@ -16,6 +21,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import coming.web3.enity.Address;
+import coming.web3.enity.UserInfo;
 import okhttp3.Headers;
 import okhttp3.HttpUrl;
 import okhttp3.OkHttpClient;
@@ -37,6 +43,7 @@ class JsInjectorClient {
     private Address walletAddress;
     private String cid;
     private String rpcUrl = "";
+    private UserInfo comingUserInfo;
 
     JsInjectorClient(Context context) {
         this.context = context;
@@ -49,6 +56,14 @@ class JsInjectorClient {
 
     public void setWalletAddress(Address address) {
         this.walletAddress = address;
+    }
+
+    public void setComingUserInfo(UserInfo userInfo) {
+        comingUserInfo = userInfo;
+    }
+
+    public UserInfo getComingUserInfo() {
+        return comingUserInfo;
     }
 
     public String getCid() {
@@ -179,7 +194,11 @@ class JsInjectorClient {
     private String loadInitJs(Context context) {
         String initSrc = loadFile(context, R.raw.init);
         String address = walletAddress == null ? Address.EMPTY.toString() : walletAddress.toString();
-        return String.format(initSrc, address, rpcUrl, chainId);
+
+        Gson gson = new Gson();
+        String userInfoJson = comingUserInfo == null ? "" : gson.toJson(comingUserInfo);
+
+        return String.format(initSrc, address, rpcUrl, chainId, userInfoJson);
     }
 
     private String loadFile(Context context, @RawRes int rawRes) {
