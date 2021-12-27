@@ -96,6 +96,10 @@ Web3View 通过注入 web3对象到加载的前端js文件中，前端应用持�
 ...
 
 ### SDK使用方式
+引入依赖
+```xml
+implementation 'com.github.coming-chat:coming-web3view-android:1.0.1'
+```
 
 添加网络访问权限到 AndroidManifest.xml
 
