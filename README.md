@@ -208,6 +208,20 @@ web3.onSignError(Message|Transaction, "some_error");
 4. 用户点击确定进行签名
 5. 签名结果提交后端进行广播
 
+## 1207 新增feature
+
+增加一个userInfo 对象注入到js中，对应：
+```
+const __userInfo = '%4$s';
+window.web3.comingUserInfo = __userInfo
+```
+
+user info 具体类型：
+
+![image](https://user-images.githubusercontent.com/7252280/147437633-42b32a06-f176-4b63-989a-3b7d4bb0ce92.png)
+
+前端通过 window.web3.comingUserInfo 拿到钱包用户的地址、交易
+
 
 
 
