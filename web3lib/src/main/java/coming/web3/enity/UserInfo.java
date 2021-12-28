@@ -10,7 +10,7 @@ public class UserInfo implements Parcelable {
     public final String avator;
     public final String address;
 
-    public  UserInfo(String name, String avator, String address) {
+    public UserInfo(String name, String avator, String address) {
         this.name = name;
         this.avator = avator;
         this.address = address;
