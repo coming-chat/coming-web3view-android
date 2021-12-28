@@ -6,18 +6,18 @@ import android.os.Parcelable;
 import com.google.gson.Gson;
 
 public class UserInfo implements Parcelable {
-    public final String cid;
+    public final String name;
     public final String avator;
     public final String address;
 
-    public  UserInfo(String cid, String avator, String address) {
-        this.cid = cid;
+    public  UserInfo(String name, String avator, String address) {
+        this.name = name;
         this.avator = avator;
         this.address = address;
     }
 
     protected UserInfo(Parcel in) {
-        cid = in.readString();
+        name = in.readString();
         avator = in.readString();
         address = in.readString();
     }
@@ -42,7 +42,7 @@ public class UserInfo implements Parcelable {
     @Override
     public void writeToParcel(Parcel dest, int flags) {
 
-        dest.writeString((cid == null ? "" : cid).toString());
+        dest.writeString((name == null ? "" : name).toString());
         dest.writeString((avator == null ? "" : avator).toString());
         dest.writeString((address == null ? "" : address).toString());
 

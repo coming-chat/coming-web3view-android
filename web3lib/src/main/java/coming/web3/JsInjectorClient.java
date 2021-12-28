@@ -41,7 +41,6 @@ class JsInjectorClient {
 
     private int chainId = 1;
     private Address walletAddress;
-    private String cid;
     private String rpcUrl = "";
     private UserInfo comingUserInfo;
 
