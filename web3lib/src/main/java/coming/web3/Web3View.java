@@ -2,6 +2,7 @@ package coming.web3;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.res.Resources;
 import android.os.Build;
 import android.util.AttributeSet;
 import android.util.Log;
@@ -64,7 +65,7 @@ public class Web3View extends WebView {
     }
 
     public Web3View(@NonNull Context context, @Nullable AttributeSet attrs) {
-        this(context, attrs, 0);
+        this(context, attrs, Resources.getSystem().getIdentifier("webViewStyle","attr","android"));
     }
 
     public Web3View(@NonNull Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
