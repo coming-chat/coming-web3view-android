@@ -90,7 +90,7 @@ public class Web3View extends WebView {
     @SuppressLint("SetJavaScriptEnabled")
     private void init() {
         jsInjectorClient = new JsInjectorClient(getContext());
-        webViewClient = new Web3ViewClient(jsInjectorClient, new UrlHandlerManager());
+        webViewClient = new Web3ViewClient(getContext(),jsInjectorClient, new UrlHandlerManager());
         WebSettings webSettings = super.getSettings();
         webSettings.setJavaScriptEnabled(true);
         webSettings.setCacheMode(WebSettings.LOAD_DEFAULT);
@@ -292,44 +292,6 @@ public class Web3View extends WebView {
         public boolean shouldOverrideUrlLoading(WebView view, WebResourceRequest request) {
             return externalClient.shouldOverrideUrlLoading(view, request)
                     || internalClient.shouldOverrideUrlLoading(view, request);
-        }
-
-        @Override
-        public void onReceivedSslError(WebView view, final SslErrorHandler handler, SslError error) {
-            final AlertDialog.Builder builder = new AlertDialog.Builder(view.getContext());
-            String message = "SSL Certificate error.";
-            switch (error.getPrimaryError()) {
-                case SslError.SSL_UNTRUSTED:
-                    message = "The certificate authority is not trusted.";
-                    break;
-                case SslError.SSL_EXPIRED:
-                    message = "The certificate has expired.";
-                    break;
-                case SslError.SSL_IDMISMATCH:
-                    message = "The certificate Hostname mismatch.";
-                    break;
-                case SslError.SSL_NOTYETVALID:
-                    message = "The certificate is not yet valid.";
-                    break;
-            }
-            message += " Do you want to continue anyway?";
-
-            builder.setTitle("SSL Certificate Error");
-            builder.setMessage(message);
-            builder.setPositiveButton("continue", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    handler.proceed();
-                }
-            });
-            builder.setNegativeButton("cancel", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    handler.cancel();
-                }
-            });
-            final AlertDialog dialog = builder.create();
-            dialog.show();
         }
 
         @Override

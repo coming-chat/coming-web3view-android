@@ -3,6 +3,9 @@ package coming.web3;
 import static android.os.Build.VERSION.SDK_INT;
 import static android.os.Build.VERSION_CODES.N;
 
+import android.app.AlertDialog;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.net.http.SslError;
 import android.text.TextUtils;
 import android.util.Base64;
@@ -23,10 +26,12 @@ public class Web3ViewClient extends WebViewClient {
 
     private final JsInjectorClient jsInjectorClient;
     private final UrlHandlerManager urlHandlerManager;
+    private final Context context;
 
     private boolean isInjected;
 
-    public Web3ViewClient(JsInjectorClient jsInjectorClient, UrlHandlerManager urlHandlerManager) {
+    public Web3ViewClient(Context context,JsInjectorClient jsInjectorClient, UrlHandlerManager urlHandlerManager) {
+        this.context = context;
         this.jsInjectorClient = jsInjectorClient;
         this.urlHandlerManager = urlHandlerManager;
     }
@@ -136,8 +141,41 @@ public class Web3ViewClient extends WebViewClient {
     }
 
     @Override
-    public void onReceivedSslError(WebView view, SslErrorHandler handler, SslError error) {
-        handler.proceed();
+    public void onReceivedSslError(WebView view, final SslErrorHandler handler, SslError error) {
+        final AlertDialog.Builder builder = new AlertDialog.Builder(context);
+        String message = "SSL Certificate error.";
+        switch (error.getPrimaryError()) {
+            case SslError.SSL_UNTRUSTED:
+                message = "The certificate authority is not trusted.";
+                break;
+            case SslError.SSL_EXPIRED:
+                message = "The certificate has expired.";
+                break;
+            case SslError.SSL_IDMISMATCH:
+                message = "The certificate Hostname mismatch.";
+                break;
+            case SslError.SSL_NOTYETVALID:
+                message = "The certificate is not yet valid.";
+                break;
+        }
+        message += " Do you want to continue anyway?";
+
+        builder.setTitle("SSL Certificate Error");
+        builder.setMessage(message);
+        builder.setPositiveButton("continue", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                handler.proceed();
+            }
+        });
+        builder.setNegativeButton("cancel", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                handler.cancel();
+            }
+        });
+        final AlertDialog dialog = builder.create();
+        dialog.show();
     }
 
     public void onReload() {
