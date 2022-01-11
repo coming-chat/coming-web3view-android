@@ -3,12 +3,9 @@ package coming.web3.enity.repository.nftassets;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.text.TextUtils;
-
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.ArrayList;
@@ -18,7 +15,6 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-
 import coming.web3.enity.repository.realm.RealmNFTAsset;
 import coming.web3.enity.repository.tokens.ERC1155Token;
 import coming.web3.util.Utils;
