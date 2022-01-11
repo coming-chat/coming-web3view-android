@@ -7,10 +7,7 @@ import android.util.Log;
 import androidx.annotation.Nullable;
 import androidx.annotation.RawRes;
 
-import com.fasterxml.jackson.databind.util.JSONPObject;
 import com.google.gson.Gson;
-
-import org.json.JSONObject;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -20,8 +17,8 @@ import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import coming.web3.enity.Address;
-import coming.web3.enity.UserInfo;
+import coming.web3.enity.webview.Address;
+import coming.web3.enity.webview.UserInfo;
 import okhttp3.Headers;
 import okhttp3.HttpUrl;
 import okhttp3.OkHttpClient;

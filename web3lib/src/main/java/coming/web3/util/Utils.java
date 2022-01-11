@@ -46,7 +46,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import coming.web3.C;
-import coming.web3.enity.ProviderTypedData;
+import coming.web3.enity.webview.ProviderTypedData;
 import coming.web3.web3j.StructuredDataEncoder;
 
 public class Utils {

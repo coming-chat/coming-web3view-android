@@ -1,15 +1,11 @@
 package coming.web3;
 
 import android.annotation.SuppressLint;
-import android.app.AlertDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.res.Resources;
-import android.net.http.SslError;
 import android.os.Build;
 import android.util.AttributeSet;
 import android.util.Log;
-import android.webkit.SslErrorHandler;
 import android.webkit.WebChromeClient;
 import android.webkit.WebResourceRequest;
 import android.webkit.WebResourceResponse;
@@ -25,16 +21,16 @@ import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 
-import coming.web3.enity.Address;
-import coming.web3.enity.EthereumMessage;
-import coming.web3.enity.EthereumTypedMessage;
-import coming.web3.enity.Message;
-import coming.web3.enity.TypedData;
-import coming.web3.enity.URLLoadInterface;
-import coming.web3.enity.UserInfo;
-import coming.web3.enity.WalletAddEthereumChainObject;
-import coming.web3.enity.Web3Call;
-import coming.web3.enity.Web3Transaction;
+import coming.web3.enity.repository.URLLoadInterface;
+import coming.web3.enity.webview.Address;
+import coming.web3.enity.webview.EthereumMessage;
+import coming.web3.enity.webview.EthereumTypedMessage;
+import coming.web3.enity.webview.Message;
+import coming.web3.enity.webview.UserInfo;
+import coming.web3.enity.webview.WalletAddEthereumChainObject;
+import coming.web3.enity.webview.Web3Call;
+import coming.web3.enity.webview.Web3Transaction;
+
 
 public class Web3View extends WebView {
     private static final String JS_PROTOCOL_CANCELLED = "cancelled";

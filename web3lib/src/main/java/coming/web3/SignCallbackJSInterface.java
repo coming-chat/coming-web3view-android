@@ -16,14 +16,14 @@ import org.web3j.protocol.core.DefaultBlockParameterName;
 
 import java.math.BigInteger;
 
-import coming.web3.enity.Address;
-import coming.web3.enity.CryptoFunctions;
-import coming.web3.enity.EthereumMessage;
-import coming.web3.enity.EthereumTypedMessage;
-import coming.web3.enity.SignMessageType;
-import coming.web3.enity.WalletAddEthereumChainObject;
-import coming.web3.enity.Web3Call;
-import coming.web3.enity.Web3Transaction;
+import coming.web3.enity.webview.Address;
+import coming.web3.enity.webview.CryptoFunctions;
+import coming.web3.enity.webview.EthereumMessage;
+import coming.web3.enity.webview.EthereumTypedMessage;
+import coming.web3.enity.webview.SignMessageType;
+import coming.web3.enity.webview.WalletAddEthereumChainObject;
+import coming.web3.enity.webview.Web3Call;
+import coming.web3.enity.webview.Web3Transaction;
 import coming.web3.util.Hex;
 import coming.web3.util.Utils;
 

@@ -8,7 +8,6 @@ import static androidx.biometric.BiometricManager.Authenticators.DEVICE_CREDENTI
 import android.app.Activity;
 import android.app.Dialog;
 import android.app.KeyguardManager;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
 import android.text.TextUtils;
@@ -24,9 +23,9 @@ import java.security.ProviderException;
 import java.util.concurrent.Executor;
 
 import coming.web3.R;
-import coming.web3.enity.AuthenticationCallback;
-import coming.web3.enity.AuthenticationFailType;
-import coming.web3.enity.Operation;
+import coming.web3.enity.repository.Operation;
+import coming.web3.enity.webview.AuthenticationCallback;
+import coming.web3.enity.webview.AuthenticationFailType;
 
 /**
  * Created by James on 7/06/2019.
@@ -72,7 +71,9 @@ public class SignTransactionDialog extends Dialog
                         //this could be a 'use pin'
                         if (!TextUtils.isEmpty(errString) && errString.equals(activity.getString(R.string.use_pin)))
                         {
-                            showAuthenticationScreen(activity, authCallback, callbackId);
+                            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                                showAuthenticationScreen(activity, authCallback, callbackId);
+                            }
                             break;
                         }
                         //drop through  |
@@ -128,7 +129,9 @@ public class SignTransactionDialog extends Dialog
         if (!hasStrongBiometric && !hasDeviceCredential)
         {
             //device should be unlocked, drop through
-            showAuthenticationScreen(activity, authCallback, callbackId);
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                showAuthenticationScreen(activity, authCallback, callbackId);
+            }
             return;
         }
 
@@ -140,7 +143,9 @@ public class SignTransactionDialog extends Dialog
         {
             if (!hasStrongBiometric) //go straight to authentication screen
             {
-                showAuthenticationScreen(activity, authCallback, callbackId);
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                    showAuthenticationScreen(activity, authCallback, callbackId);
+                }
                 return;
             }
             else

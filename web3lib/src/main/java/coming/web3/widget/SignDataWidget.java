@@ -11,8 +11,8 @@ import android.widget.TextView;
 import androidx.annotation.Nullable;
 
 import coming.web3.R;
-import coming.web3.enity.ActionSheetInterface;
-import coming.web3.enity.Signable;
+import coming.web3.enity.webview.ActionSheetInterface;
+import coming.web3.enity.webview.Signable;
 
 
 /**

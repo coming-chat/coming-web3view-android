@@ -6,6 +6,10 @@ import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.math.RoundingMode;
 import java.text.DecimalFormat;
+import java.text.NumberFormat;
+
+import coming.web3.enity.repository.CustomViewSettings;
+import coming.web3.enity.repository.tokens.Token;
 
 public class BalanceUtils
 {
@@ -141,16 +145,52 @@ public class BalanceUtils
         return scaledValue(value, pattern, decimals, precision);
     }
 
+    public static String getScaledValueMinimal(BigInteger value, long decimals)
+    {
+        return getScaledValueMinimal(new BigDecimal(value), decimals, Token.TOKEN_BALANCE_FOCUS_PRECISION); //scaledValue(new BigDecimal(value), getDigitalPattern(Token.TOKEN_BALANCE_FOCUS_PRECISION, 0), decimals);
+    }
 
     public static String getScaledValueMinimal(BigDecimal value, long decimals, int max_precision)
     {
         return scaledValue(value, getDigitalPattern(max_precision, 0), decimals, 0);
     }
 
-
+    public static String getScaledValueScientific(final BigDecimal value, long decimals)
+    {
+        return getScaledValueScientific(value, decimals, showDecimalPlaces);
+    }
 
     //TODO: write 'suffix' generator: https://www.nist.gov/pml/weights-and-measures/metric-si-prefixes
     // Tera to pico (T to p) Anything below p show as 0.000
+    public static String getScaledValueScientific(final BigDecimal value, long decimals, int dPlaces)
+    {
+        String returnValue;
+        BigDecimal correctedValue = value.divide(BigDecimal.valueOf(Math.pow(10, decimals)), 18, RoundingMode.DOWN);
+        final NumberFormat formatter = new DecimalFormat(CustomViewSettings.getDecimalFormat());
+        final BigDecimal displayThreshold = BigDecimal.ONE.divide(BigDecimal.valueOf(Math.pow(10, dPlaces)), 18, RoundingMode.DOWN);
+        formatter.setRoundingMode(RoundingMode.DOWN);
+        if (value.equals(BigDecimal.ZERO)) //zero balance
+        {
+            returnValue = "0";
+        }
+        else if (correctedValue.compareTo(displayThreshold) < 0) //very low balance //TODO: Fold into getSuffixedValue below
+        {
+            returnValue = "0.000~";
+        }
+        else if (requiresSuffix(correctedValue, dPlaces))
+        {
+            returnValue = getSuffixedValue(correctedValue, dPlaces);
+        }
+        else //otherwise display in standard pattern to dPlaces dp
+        {
+            DecimalFormat df = new DecimalFormat(getDigitalPattern(dPlaces));
+            df.setRoundingMode(RoundingMode.DOWN);
+            returnValue = convertToLocale(df.format(correctedValue));
+        }
+
+        return returnValue;
+    }
+
     private static boolean requiresSuffix(BigDecimal correctedValue, int dPlaces)
     {
         final BigDecimal displayThreshold = BigDecimal.ONE.divide(BigDecimal.valueOf(Math.pow(10, dPlaces)), 18, RoundingMode.DOWN);
@@ -214,6 +254,17 @@ public class BalanceUtils
         return convertToLocale(df.format(value));
     }
 
+    /**
+     * Default precision method
+     *
+     * @param valueStr
+     * @param decimals
+     * @return
+     */
+    public static String getScaledValue(String valueStr, long decimals)
+    {
+        return getScaledValue(valueStr, decimals, Token.TOKEN_BALANCE_PRECISION);
+    }
 
     /**
      * Universal scaled value method
@@ -238,4 +289,3 @@ public class BalanceUtils
         }
     }
 }
-

@@ -3,6 +3,9 @@ plugins {
     id 'org.jetbrains.kotlin.android'
     id 'maven-publish'
 }
+apply plugin: 'kotlin-kapt'
+apply plugin: 'realm-android'
+apply plugin: 'com.github.johnrengelman.shadow'
 
 afterEvaluate {
     publishing {
@@ -64,7 +67,15 @@ dependencies {
     implementation 'androidx.biometric:biometric:1.1.0'
     implementation group: 'com.github.cliftonlabs', name: 'json-simple', version: '3.1.0'
     implementation group: 'com.google.code.gson', name: 'gson', version: '2.8.5'
+    implementation 'org.web3j:core:4.5.0'
+    implementation group: 'com.trustwallet', name: 'wallet-core', version: '2.6.3'
+    implementation 'com.github.salomonbrys.kotson:kotson:2.5.0'
 
+    implementation 'org.bouncycastle:bcprov-jdk15on:1.62'
+    // https://mvnrepository.com/artifact/com.github.cliftonlabs/json-simple
+    implementation group: 'com.github.cliftonlabs', name: 'json-simple', version: '3.1.0'
+
+    implementation 'com.github.bumptech.glide:glide:4.12.0'
     androidTestImplementation 'androidx.test.ext:junit:1.1.3'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
 }

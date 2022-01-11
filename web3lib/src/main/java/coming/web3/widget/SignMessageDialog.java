@@ -14,8 +14,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 
 import coming.web3.R;
-import coming.web3.enity.EthereumTypedMessage;
-import coming.web3.enity.Signable;
+import coming.web3.enity.webview.EthereumTypedMessage;
+import coming.web3.enity.webview.Signable;
 
 
 public class SignMessageDialog extends Dialog {
