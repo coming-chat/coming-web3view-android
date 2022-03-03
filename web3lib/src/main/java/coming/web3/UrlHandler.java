@@ -4,7 +4,7 @@ import android.net.Uri;
 
 public interface UrlHandler {
 
-    String getSchemeSpecificPart();
+    String getHostPath();
 
     String handle(Uri uri);
 

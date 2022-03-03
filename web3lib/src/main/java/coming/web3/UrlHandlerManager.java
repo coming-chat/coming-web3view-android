@@ -14,16 +14,16 @@ public class UrlHandlerManager {
 
     public UrlHandlerManager(UrlHandler... handlers) {
         for (UrlHandler urlHandler : handlers) {
-            this.handlers.put(urlHandler.getSchemeSpecificPart(), urlHandler);
+            this.handlers.put(urlHandler.getHostPath(), urlHandler);
         }
     }
 
     public void add(@NonNull UrlHandler urlHandler) {
-        this.handlers.put(urlHandler.getSchemeSpecificPart(), urlHandler);
+        this.handlers.put(urlHandler.getHostPath(), urlHandler);
     }
 
     public void remove(@NonNull UrlHandler urlHandler) {
-        this.handlers.remove(urlHandler.getSchemeSpecificPart());
+        this.handlers.remove(urlHandler.getHostPath());
     }
 
     String handle(String url) {
@@ -38,7 +38,7 @@ public class UrlHandlerManager {
         if (uri == null) {
             return null;
         }
-        if (!handlers.containsKey(uri.getSchemeSpecificPart())) {
+        if (!handlers.containsKey(getHostPath(uri))) {
             return uri.toString();
         }
         return getHandler(uri).handle(uri);
@@ -48,6 +48,10 @@ public class UrlHandlerManager {
         if (uri == null) {
             return null;
         }
-        return handlers.get(uri.getSchemeSpecificPart());
+        return handlers.get(getHostPath(uri));
+    }
+
+    String getHostPath(Uri uri){
+        return uri.getHost()+uri.getPath();
     }
 }
