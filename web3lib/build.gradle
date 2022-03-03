@@ -11,7 +11,7 @@ afterEvaluate {
                 from components.release
                 groupId = 'com.comingchat.web3'
                 artifactId = 'web3'
-                version = '1.0.3'
+                version = '1.0.6'
             }
         }
     }

@@ -1,11 +1,15 @@
 package coming.web3;
 
 import android.annotation.SuppressLint;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.res.Resources;
+import android.net.http.SslError;
 import android.os.Build;
 import android.util.AttributeSet;
 import android.util.Log;
+import android.webkit.SslErrorHandler;
 import android.webkit.WebChromeClient;
 import android.webkit.WebResourceRequest;
 import android.webkit.WebResourceResponse;
@@ -86,7 +90,7 @@ public class Web3View extends WebView {
     @SuppressLint("SetJavaScriptEnabled")
     private void init() {
         jsInjectorClient = new JsInjectorClient(getContext());
-        webViewClient = new Web3ViewClient(jsInjectorClient, new UrlHandlerManager());
+        webViewClient = new Web3ViewClient(getContext(),jsInjectorClient, new UrlHandlerManager());
         WebSettings webSettings = super.getSettings();
         webSettings.setJavaScriptEnabled(true);
         webSettings.setCacheMode(WebSettings.LOAD_DEFAULT);
