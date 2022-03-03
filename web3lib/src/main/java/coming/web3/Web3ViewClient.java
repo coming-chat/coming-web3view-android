@@ -3,6 +3,7 @@ package coming.web3;
 import static android.os.Build.VERSION.SDK_INT;
 import static android.os.Build.VERSION_CODES.N;
 
+import android.net.Uri;
 import android.net.http.SslError;
 import android.text.TextUtils;
 import android.util.Base64;
@@ -61,6 +62,14 @@ public class Web3ViewClient extends WebViewClient {
             isInjected = false;
         }
         String urlToOpen = urlHandlerManager.handle(url);
+        if (!TextUtils.isEmpty(url)) {
+            Uri uri = Uri.parse(url);
+            UrlHandler handler = urlHandlerManager.getHandler(uri);
+            if (handler != null) {
+                result = handler.isIntercept();
+            }
+        }
+
         if (!url.startsWith("http")) {
             result = true;
         }

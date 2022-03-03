@@ -4,7 +4,9 @@ import android.net.Uri;
 
 public interface UrlHandler {
 
-    String getScheme();
+    String getSchemeSpecificPart();
 
     String handle(Uri uri);
+
+    Boolean isIntercept();
 }
