@@ -2,12 +2,6 @@
 
 Coming Web3View 是coming的web3浏览器接口协议，支持以太坊生态、polkadot生态的应用。
 
-参考AlphaWallet以及TrustWallet的实现，抽离出核心功能，支持AndroidX
-
-\- AlphaWallet
-
-<https://github.com/AlphaWallet/alpha-wallet-android>
-
 ## 接口测试网址
 https://danfinlay.github.io/js-eth-personal-sign-examples/
 
